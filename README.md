@@ -111,7 +111,8 @@ plt.show()
 ## Output
 
 <img width="735" height="665" alt="image" src="https://github.com/user-attachments/assets/e5bdb472-86ef-42bd-b283-458d83692f12" />
-### Output Graph
+
+## Output Graph
 The following heatmap is generated for the estimated state-value function:
 
 - Darker colors represent lower state values.
