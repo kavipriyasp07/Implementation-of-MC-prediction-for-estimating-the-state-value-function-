@@ -57,6 +57,56 @@ Monte Carlo methods calculate the average return obtained after visiting a state
 ## Program
 
 ```python
+NAME:KAVIPRIYA SP
+REG NO:2305002011
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Number of states
+n_states = 5
+
+# Initialize value function
+V = np.zeros(n_states)
+
+# Returns for each state
+returns = {s: [] for s in range(n_states)}
+
+# Discount factor
+gamma = 0.9
+
+# Sample episodes
+episodes = [
+    [(0, 1), (1, 2), (2, 3)],
+    [(0, 2), (2, 1), (3, 4)],
+    [(1, 3), (2, 2), (4, 5)]
+]
+
+# Monte Carlo Prediction
+for episode in episodes:
+    G = 0
+    
+    # Traverse episode in reverse
+    for t in reversed(range(len(episode))):
+        state, reward = episode[t]
+        
+        G = gamma * G + reward
+        
+        # First visit MC
+        if state not in [x[0] for x in episode[:t]]:
+            returns[state].append(G)
+            V[state] = np.mean(returns[state])
+
+# Print state values
+print("Estimated State Values:")
+for s in range(n_states):
+    print(f"State {s}: {V[s]:.2f}")
+
+# Plotting
+plt.bar(range(n_states), V)
+plt.xlabel("States")
+plt.ylabel("Value Function V(s)")
+plt.title("Monte Carlo State-Value Function Estimate")
+plt.show()
 ```
 ## Output
 
@@ -71,6 +121,7 @@ The following heatmap is generated for the estimated state-value function:
 - Darker colors represent lower state values.
 - Terminal states have value 0.
 - States farther from terminal states have larger negative values.
+<img width="735" height="665" alt="image" src="https://github.com/user-attachments/assets/e5bdb472-86ef-42bd-b283-458d83692f12" />
 
 
 
